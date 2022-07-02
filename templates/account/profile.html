@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }} {% endblock %}
+
+{% block home_color %} white {% endblock %}
+{% block add_color %} white {% endblock %}
+{% block signup_color %} white {% endblock %}
+{% block login_color %} white {% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center">
+<div class="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
+	{% if user_model.profile_pic %}
+		<img src="{{ user_model.profile_pic.url }}" alt="" class="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square">
+	{% else %}
+		<img src="/media/images/default_picture.jpeg" alt="" class="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square">
+	{% endif %}
+	
+	<div class="space-y-4 text-center divide-y divide-gray-700">
+		<div class="my-2 space-y-1">
+			<h2 class="text-xl font-semibold sm:text-2xl">{{ user_model.first_name }}</h2>
+		</div>
+	</div>
+	{% if user_model.bio %}
+		<p class="px-5 text-xs sm:text-base dark:text-gray-400"><strong>Bio:</strong> {{ user_model.bio }}</p>
+	{% endif %}
+    <p class="px-5 text-xs sm:text-base dark:text-gray-400"><strong>Email:</strong> {{ user_model.email }}</p><br/>
+    <a href="{% url 'user_posts' user_model.username %}" class="btn btn-primary btn-xs" >  See {{ posts_count }} posts</a>
+</div>
+</div>
+<br/>
+
+<br/><br/><br/><br/>
+
+{% endblock %}

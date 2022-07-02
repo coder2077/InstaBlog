@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block signup_color %} #a991f7 {% endblock %}
+{% block add_color %} white {% endblock %}
+{% block home_color %} white {% endblock %}
+{% block login_color %} white {% endblock %}
+
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="flex justify-center">
+        <div class="flex flex-col w-full max-w-md p-12 space-y-4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            <div class="mb-8 text-center">
+                <h1 class="my-3 text-4xl font-bold">Sign up</h1>
+                {% if form.errors %}
+                    <p class="text-sm" style="color: red;">Please correct the errors below.</p>
+                {% else %}
+                    <p class="text-sm dark:text-gray-400">Sign up to see posts from your friends.</p>
+                {% endif %}
+            </div>
+            <form novalidate="" action="" class="space-y-12 ng-untouched ng-pristine ng-valid">
+                <div class="space-y-4">
+                    <div>
+                        <label for="id_first_name" class="block mb-2 text-sm">First Name</label>
+                        <input type="text" name="first_name" autofocus maxlength="150" id="id_first_name" placeholder="First Name" required class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                        <span class="text-sm" style="color: yellow;">{{ form.errors.first_name }}</span>
+                    </div>
+                    <div>
+                        <label for="id_username" class="block mb-2 text-sm">Username</label>
+                        <input type="text" name="username" autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" placeholder="Your username" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                        <span class="text-sm" style="color: yellow;">{{ form.errors.username }}</span>
+                    </div>
+                    <div>
+                        <label for="id_email" class="block mb-2 text-sm">Email address</label>
+                        <input required type="email" name="email" maxlength="254" id="id_email" placeholder="username@example.com" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                        <span class="text-sm" style="color: yellow;">{{ form.errors.email }}</span>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label for="id_password1" class="text-sm">Password</label>
+                        </div>
+                        <input type="password" name="password1" id="id_password1" required placeholder="Your password" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                        <span class="text-sm" style="color: yellow;">{{ form.errors.password1 }}</span>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label for="id_password2" class="text-sm">Password confirmation</label>
+                        </div>
+                        <input type="password" name="password2" id="id_password2" required placeholder="Your password" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                        <span class="text-sm" style="color: yellow;">{{ form.errors.password2 }}</span>
+                    </div>
+                </div>
+                <br/>
+                <div class="space-y-2">
+                    <div>
+                        <button type="submit" class="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Sign up</button>
+                    </div>
+                    <br/>
+                    <p class="px-6 text-sm text-center dark:text-gray-400">Have an account?
+                        <a rel="noopener noreferrer" href="{% url 'login' %}" class="hover:underline dark:text-violet-400">Login</a>.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+<br/><br/><br/>
+
+{% endblock %}
+
+

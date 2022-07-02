@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+          {% block title %} {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.4/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a href="{% url 'home' %}" class="btn btn-ghost normal-case text-xl" style="color: blueviolet; font-style: italic;">InstaBlog</a>
+      </div>
+      <div class="flex-1">
+        <a href="{% url 'home' %}" class="btn btn-ghost normal-case text-xl"><span style="font-size: 27px; color: {% block home_color %}{% endblock %};"><i class="fa-solid fa-house"></i></span></a>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="navbar bg-base-100">
+          <div class="flex-1">
+            <a href="{% url 'new_post' %}" class="btn btn-ghost normal-case text-xl"><span style="font-size: 27px; color: {% block add_color %}{% endblock %};"><i class="fa-solid fa-bullhorn"></i></span></a>
+          </div>
+        <div class="flex-none">
+          <div class="dropdown dropdown-end">
+            <button class="btn btn-ghost btn-circle">
+              <div class="indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                <span class="badge badge-xs badge-primary indicator-item"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+              <div class="w-10 rounded-full">
+                {% if user.profile_pic %}
+                  <img src="{{ user.profile_pic.url }}" />
+                {% else %}
+                  <img src="/media/images/default_picture.jpeg" />
+                {% endif %}
+              </div>
+            </label>
+            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+                <a class="justify-between" href="{% url 'profile' user.username %}">
+                  Profile
+                </a>
+              </li>
+              <li><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
+              <li><a href="{% url 'saved_posts' %}">Saved Posts</a></li>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+            {% else %}
+            <div class="navbar bg-base-100">
+              <div class="flex-None">
+                <a href="{% url 'signup' %}" class="btn btn-ghost normal-case text-xl"><span style="font-size: 15px; color: {% block signup_color %}{% endblock %};"><i class="fa-solid fa-user-plus"></i> Sign Up</span></a>
+              </div>
+              <div class="flex-None">
+                <a href="{% url 'login' %}" class="btn btn-ghost normal-case text-xl"><span style="font-size: 15px; color: {% block login_color %}{% endblock %};"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</span></a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+    <hr><br/>
+    <div class="container mx-auto px-20">
+      {% block content %} {% endblock %}
+    </div>
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+      <div class="grid grid-flow-col gap-4">
+        <a class="link link-hover">Users</a> 
+        <a class="link link-hover" href="{% url 'home' %}">Posts</a> 
+        <a class="link link-hover">About</a> 
+        <a class="link link-hover" href="https://t.me/coder2077/">Developer</a>
+      </div> 
+      <div>
+        <p>Copyright © 2022 - All right reserved by coder2077</p>
+      </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/fcbbe7e1cd.js" crossorigin="anonymous"></script>
+  </body>
+</html>

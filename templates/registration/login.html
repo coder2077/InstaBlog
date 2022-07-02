@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block home_color %} white {% endblock %}
+{% block add_color %} white {% endblock %}
+{% block signup_color %} white {% endblock %}
+{% block login_color %} #a991f7 {% endblock %}
+
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="flex justify-center">
+        <div class="flex flex-col w-full max-w-md p-12 space-y-4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            <div class="mb-8 text-center">
+                <h1 class="my-3 text-4xl font-bold">Login</h1>
+                {% if form.errors %}
+                    <p class="text-sm" style="color: yellow;">Please enter a correct username and password.</p>
+                {% else  %}
+                    <p class="text-sm dark:text-gray-400">Login to access your account</p>
+                {% endif %}
+            </div>
+            <form novalidate="" action="" class="space-y-12 ng-untouched ng-pristine ng-valid">
+                <div class="space-y-4">
+                    <div>
+                        <label for="id_username" class="block mb-2 text-sm">Username</label>
+                        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" placeholder="Your username" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label for="id_password" class="text-sm">Password</label>
+                            <a rel="noopener noreferrer" href="#" class="text-xs hover:underline dark:text-gray-400">Forgot password?</a>
+                        </div>
+                        <input type="password" name="password" id="id_password" required placeholder="Your password" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                    </div>
+                </div>
+                <br/>
+                <div class="space-y-2">
+                    <div>
+                        <button type="submit" class="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login</button>
+                    </div>
+                    <br/>
+                    <p class="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
+                        <a rel="noopener noreferrer" href="{% url 'signup' %}" class="hover:underline dark:text-violet-400">Sign up</a>.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+<br/><br/><br/>
+
+{% endblock %}
+
+

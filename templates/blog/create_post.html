@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} New Post {% endblock %}
+
+{% block home_color %} white {% endblock %}
+{% block add_color %} #a991f7 {% endblock %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="flex justify-center">
+        <div class="flex flex-col w-full max-w-md p-12 space-y-4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            <h1 style="font-size: 30px; text-align: center;">Create Post</h1>
+            {% if form.errors %}
+                <p class="text-sm" style="color: red;">Please correct the errors below.</p>
+            {% endif %}
+            
+            <fieldset class="w-full space-y-1 dark:text-gray-100">
+                <label for="id_photo" class="block text-sm font-medium">Photo</label>
+                <div class="flex">
+                    <input type="file" required  name="photo" id="id_photo" accept="image/*" class="px-0.1 py-3 border-2 border-dashed rounded-md dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+                </div>
+            </fieldset>
+            <span class="text-sm" style="color: yellow;">{{ form.errors.photo }}</span>
+            
+        <label for="body" class="block text-sm font-medium">Your message</label>
+        <textarea id="id_body" name="body" rows="7" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+        <span class="text-sm" style="color: yellow;">{{ form.errors.body }}</span>
+        <button class="btn btn-primary">Post</button>
+        
+        </div>
+    </div>
+</form>
+<br/><br/><br/>
+
+{% endblock %}
+

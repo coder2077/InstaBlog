@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Profile {% endblock %}
+
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="flex justify-center">
+        <div class="flex flex-col w-full max-w-md p-12 space-y-4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            <h1 style="font-size: 30px; text-align: center;">Edit Profile</h1>
+            {% if form.errors %}
+                <p class="text-sm" style="color: red;">Please correct the errors below.</p>
+            {% endif %}
+            
+            <fieldset class="w-full space-y-1 dark:text-gray-100">
+                {% if user.profile_pic %}
+                    <label for="photo" class="block text-sm font-medium">Currently avatar: <a href="{{ user.profile_pic.url }}" class="link link-hover link-primary">{{ user.profile_pic }}</a></label>
+                {% endif %}
+
+                <label for="id_profile_pic" class="block mb-2 text-sm">Change avatar</label>
+                <div class="flex">
+                    <input type="file" name="profile_pic" id="id_profile_pic" accept="image/*" class="px-0.1 py-3 border-2 border-dashed rounded-md dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+                    <span class="text-sm" style="color: yellow;">{{ form.errors.profile_pic }}</span>
+                </div>
+            </fieldset>
+
+            <label for="id_first_name" class="block mb-2 text-sm">First name</label>
+            <input value="{{ user.first_name }}" type="text" name="first_name" autofocus autocapitalize="none" autocomplete="first_name" maxlength="150" id="id_first_name" placeholder="Your name" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+            <span class="text-sm" style="color: yellow;">{{ form.errors.first_name }}</span>
+
+
+            <label for="id_bio" class="block mb-2 text-sm">Bio</label>
+            <input value="{{ user.bio }}" type="text" name="bio" autofocus autocapitalize="none" autocomplete="bio" maxlength="150" id="id_bio" placeholder="Add Bio" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+            <span class="text-sm" style="color: yellow;">{{ form.errors.bio }}</span>
+
+            <label for="id_email" class="block mb-2 text-sm">Email address</label>
+            <input value="{{ user.email }}" required type="email" name="email" maxlength="254" id="id_email" placeholder="username@example.com" class="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+            <span class="text-sm" style="color: yellow;">{{ form.errors.email }}</span>
+ 
+        
+        <button class="btn btn-primary">Save</button>
+        
+        </div>
+    </div>
+</form>
+<br/><br/><br/>
+
+
+{% endblock %}
+
